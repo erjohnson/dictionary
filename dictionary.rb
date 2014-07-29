@@ -60,16 +60,28 @@ def add_term
   space
   puts "New Term Added To The Dictionary!"
   space
-  sleep 1.5
+  sleep 0.7
   main_menu
 end
 
 def list_terms
   system 'clear'
   header
-  Term.all.each do |term|
-    puts term.word
+  Term.all.each_with_index do |term, index|
+    puts index.to_s + ") " + term.word
   end
+  space
+  puts "Enter the number of the term you wish to View:"
+  term_num = gets.chomp.to_i
+  view_term(term_num)
+end
+
+def view_term term_num
+  system 'clear'
+  header
+  puts Term.all.at(term_num).word
+  puts Term.all.at(term_num).definition
+  space
 end
 
 main_menu
